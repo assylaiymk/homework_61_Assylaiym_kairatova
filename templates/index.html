@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+<li>
+    <a href="{% url 'task_add' %}">Add task to list</a>
+    <a href="{% url 'project_add' %}">Add project</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<h1>To-Do list</h1>
+{% include 'partial/search.html' %}
+{% for task in tasks %}
+    <p class="fw-bold">Title - {{ task.title }}</p>
+    <p>Description: {{ task.description }}</p>
+    <p><a class="btn btn-primary" href="{% url 'project_detail' task.pk %}">View project</a> </p>
+    <p><a class="btn btn-primary" href="{% url 'task_detail' task.pk %}">More</a> </p>
+    <p><a class="btn btn-primary" href="{% url 'task_update' task.pk %}">Update</a> </p>
+    <p><a class="btn btn-primary" href="{% url 'task_delete' task.pk %}">Delete</a> </p>
+{% endfor %}
+<br>
+{% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+{% endif %}
+{% endblock %}

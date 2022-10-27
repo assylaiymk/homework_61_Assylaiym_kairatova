@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+    Project - {{ task.title }}
+{% endblock %}
+
+{% block menu %}
+<li>
+    <a href="{% url 'project_add' %}">Add project</a>
+</li>
+{% endblock %}
+
+{% block content %}
+    <p class="fw-bold">Title: {{ project.title }}</p>
+    <p>Description: {{ project.description }}</p>
+    <p>Task: {{ project.task }}</p>
+{% endblock %}
