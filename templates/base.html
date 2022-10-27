@@ -16,6 +16,21 @@
     <ul class="menu">
         <li><a href="{% url 'index' %}">Home</a> </li>
         {% block menu %}{% endblock %}
+        {% if user.is_authenticated %}
+        <li >
+            <a href="{% url 'task_add' %}">Add task to list</a>
+            <a href="{% url 'project_add' %}">Add project</a>
+        </li>
+        <li class="auth">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <span>Hello {{ user.username }}</span>
+                <input type="submit" value="Exit">
+            </form>
+            </li>
+        {% else %}
+            <li class="auth"> <a href="{% url 'login' %}">Log in</a> </li>
+        {% endif %}
     </ul>
     </div>
 </nav>
